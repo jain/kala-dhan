@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Crypto P2P Exchange Rates</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th, td {
+        text-align: center;
+        padding: 8px;
+        vertical-align: middle;
+        border: 1px solid black;
+      }
+      img {
+        height: 20px;
+        width: 30px;
+        margin-right: 10px;
+        vertical-align: middle;
+      }
+      td:first-child {
+        text-align: left;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Crypto P2P Exchange Rates</h1>
+    <table>
+      <tr>
+        <th>Country</th>
+        <th>P2P Exchange Rate ($1 = )</th>
+        <th>Official Exchange Rate ($1 = )</th>
+      </tr>
+      <tr>
+        <td><img src="https://flagpedia.net/data/flags/normal/ar.png" alt="Argentina Flag">Argentina</td>
+        <td id="exchange-rate-ar">1</td>
+        <td id="fx-ar">1</td>
+      </tr>
+      <tr>
+        <td><img src="https://flagpedia.net/data/flags/normal/eg.png" alt="Egypt Flag">Egypt</td>
+        <td id="exchange-rate-eg">1</td>
+        <td id="fx-eg">1</td>
+      </tr>
+      <tr>
+        <td><img src="https://flagpedia.net/data/flags/normal/ng.png" alt="Nigeria Flag">Nigeria</td>
+        <td id="exchange-rate-ng">1</td>
+        <td id="fx-ng">1</td>
+      </tr>
+      <tr>
+        <td><img src="https://flagpedia.net/data/flags/normal/pk.png" alt="Pakistan Flag">Pakistan</td>
+        <td id="exchange-rate-pk">1</td>
+        <td id="fx-pk">1</td>
+      </tr>
+    </table>
+    <script src="http://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="helper.js"></script>
+    <script>
+      $(function() {
+        getExchangeRate('ARS', $('#exchange-rate-ar'));
+        getExchangeRate('EGP', $('#exchange-rate-eg'));
+        getExchangeRate('NGN', $('#exchange-rate-ng'));
+        getExchangeRate('PKR', $('#exchange-rate-pk'));
+        getFxRate([['ARS', $('#fx-ar')], ['EGP', $('#fx-eg')], ['NGN', $('#fx-ng')], ['PKR', $('#fx-pk')]])
+      });
+    </script>
+  </body>
+</html>
+
