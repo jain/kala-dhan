@@ -24,11 +24,11 @@ function getExchangeRate(currencyCode, cell) {
 
 
 function getFxRate(cellList) {
-  const xeUrl = 'https://api.allorigins.win/raw?url=https://www.xe.com/_next/data/JFeY0MnZuoxnYOVJj5Q5F/en/currencyconverter/convert.json?Amount=1&From=USD&To=EUR'
+  const xeUrl = 'https://open.er-api.com/v6/latest/USD'
     return $.get(xeUrl)
     .then(function(data) {
       // Parse the response JSON data
-      const rates = data.pageProps.initialRatesData.rates;
+      const rates = data.rates;
 
       // Iterate through the cellList and update each cell with the corresponding exchange rate
       for (let i = 0; i < cellList.length; i++) {
