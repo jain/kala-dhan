@@ -1,11 +1,20 @@
 function getExchangeRate(currencyCode, cell) {
-  const url = `https://cors-anywhere.herokuapp.com/https://www.okx.com/v3/c2c/tradingOrders/books?quoteCurrency=${currencyCode}&baseCurrency=USDT&side=sell&paymentMethod=all&userType=all&sortType=price_asc`;
+  const url = `https://www.binance.com/bapi/fiat/v3/public/fiatpayment/buy/get-crypto-list?fiatCurrency=${currencyCode}`;
 
   return $.get(url)
     .then(function(data) {
-      // Parse the response JSON data
-      const exchangeRate = data.data.sell[0].price;
+    // find the index of the desired currency in the list
+    const usdtIndex = data.data.cryptoList.findIndex(item => item.assetCode === 'USDT');
+    if (usdtIndex !== -1) {
+      // extract the USDT price
+      const exchangeRate = data.data.cryptoList[usdtIndex].quotation;
       cell.text(exchangeRate);
+    } else {
+      cell.text('Exchange Rate Not Found!');
+    }
+//    // Parse the response JSON data
+//    const exchangeRate = data.data.sell[0].price;
+//    cell.text(exchangeRate);
     })
     .fail(function(error) {
       // Handle errors
@@ -15,7 +24,7 @@ function getExchangeRate(currencyCode, cell) {
 
 
 function getFxRate(cellList) {
-  const xeUrl = 'https://cors-anywhere.herokuapp.com/https://www.xe.com/_next/data/JFeY0MnZuoxnYOVJj5Q5F/en/currencyconverter/convert.json?Amount=1&From=USD&To=EUR'
+  const xeUrl = 'https://api.allorigins.win/raw?url=https://www.xe.com/_next/data/JFeY0MnZuoxnYOVJj5Q5F/en/currencyconverter/convert.json?Amount=1&From=USD&To=EUR'
     return $.get(xeUrl)
     .then(function(data) {
       // Parse the response JSON data
